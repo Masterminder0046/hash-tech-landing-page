@@ -1,1 +1,0 @@
-# hash-tech-landing-page
