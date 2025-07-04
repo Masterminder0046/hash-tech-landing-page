@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#HASH_TECH Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .container {
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      width: 90%;
+      max-width: 1000px;
+      flex-wrap: wrap;
+    }
+
+    .left-panel {
+      flex: 1;
+      background: linear-gradient(135deg, #ffd700, #f2c200);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-width: 280px;
+    }
+
+    .left-panel h1 {
+      font-size: 2.5rem;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .left-panel p {
+      color: #222;
+    }
+
+    .right-panel {
+      flex: 1;
+      padding: 40px;
+      min-width: 300px;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 30px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tabs button.active {
+      color: #ffd700;
+      border-color: #ffd700;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    form.active {
+      display: flex;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background: #222;
+      color: #fff;
+    }
+
+.login-btn {
+  background: #000;
+  color: #FFD700;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 0 10px #FFD700;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+}
+.login-btn:hover {
+  background: #FFD700;
+  color: #000;
+  box-shadow: 0 0 20px #FFD700;
+}
+
+
+    .social-logins {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-logins button {
+      border: none;
+      background: #222;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+
+    .social-logins button:hover {
+      transform: scale(1.05);
+      background: #333;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-panel,
+      .right-panel {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+ <div id="particles-js"></div>
+
+<body>
+ <div class="container">
+  <div class="left-panel">
+    <h1>#HASH_TECH</h1>
+    <p>Innovating login experiences</p>
+  </div>
+
+  <div class="right-panel">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="login-form" class="active" onsubmit="handleLogin(event)">
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit" class="login-btn">Login</button>
+
+      <div class="social-logins">
+        <button type="button"><i class="bi bi-google"></i> Google</button>
+        <button type="button"><i class="bi bi-facebook"></i> Facebook</button>
+      </div>
+    </form>
+
+    <!-- SIGNUP FORM -->
+    <form id="signup-form" onsubmit="handleSignup(event)">
+      <input type="text" placeholder="Username" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit" class="login-btn">Sign Up</button>
+
+      <div class="social-logins">
+        <button type="button"><i class="bi bi-google"></i> Google</button>
+        <button type="button"><i class="bi bi-facebook"></i> Facebook</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <script>
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const form = document.getElementById("login-form");
+    if (form.checkValidity()) {
+      window.location.href = "showcasse.html"; // ✅ redirect after validation
+    }
+  }
+
+  function handleSignup(event) {
+    event.preventDefault();
+    const form = document.getElementById("signup-form");
+    if (form.checkValidity()) {
+      window.location.href = "showcasse.html"; // ✅ redirect after validation
+    }
+  }
+
+  function switchTab(tab) {
+    const loginForm = document.getElementById("login-form");
+    const signupForm = document.getElementById("signup-form");
+
+    const loginBtn = document.querySelector(".tab-btn:nth-child(1)");
+    const signupBtn = document.querySelector(".tab-btn:nth-child(2)");
+
+    loginForm.classList.remove("active");
+    signupForm.classList.remove("active");
+    loginBtn.classList.remove("active");
+    signupBtn.classList.remove("active");
+
+    if (tab === 'login') {
+      loginForm.classList.add("active");
+      loginBtn.classList.add("active");
+    } else {
+      signupForm.classList.add("active");
+      signupBtn.classList.add("active");
+    }
+  }
+
+
+    // Switch Tabs
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('form').forEach(f => f.classList.remove('active'));
+
+      document.querySelector(`.tab-btn[onclick*="${tab}"]`).classList.add('active');
+      document.getElementById(`${tab}-form`).classList.add('active');
+    }
+
+    // Particle JS
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": "#ffd700" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": { "value": 3 },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffd700",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 3 }
+      },
+      "interactivity": {
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+
+</html>
